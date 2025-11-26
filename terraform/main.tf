@@ -52,7 +52,8 @@ resource "aws_instance" "app_server" {
     algorithm = var.algorithm,
     amadeus_api_key = var.amadeus_api_key,
     amadeus_api_secret = var.amadeus_api_secret,
-    amadeus_base_url = var.amadeus_base_url
+    amadeus_base_url = var.amadeus_base_url,
+    database_url = var.database_url
   })
 
   vpc_security_group_ids = [aws_security_group.app_server_sg.id]
