@@ -36,7 +36,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.7
+          terraform_version: latest
 
       # 4. Inject the Master Secret File
       # This takes your 'TF_VARS_FILE' secret and creates the real file on the runner
