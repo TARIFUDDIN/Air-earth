@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'terraform/**'
+      - '.github/workflows/**' # Added this so changes to this file trigger a run
 
 permissions:
   contents: read
@@ -32,13 +33,20 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: latest  # Fixes the 'use_lockfile' error
+          terraform_version: latest
 
-      # THIS IS THE FIX FOR THE QUOTES
+      # --- THE FIX IS HERE ---
       - name: Create terraform.tfvars
         env:
+          # We load the secret into an Environment Variable first.
+          # This prevents the shell from eating your quotes.
           TF_VARS: ${{ secrets.TF_VARS_FILE }}
-        run: echo "$TF_VARS" > terraform.tfvars
+        run: |
+          echo "$TF_VARS" > terraform.tfvars
+          
+      # --- DEBUG STEP (Prints the file to logs so we can check it) ---
+      - name: Debug - Show tfvars
+        run: cat terraform.tfvars
 
       - name: Terraform Init
         run: terraform init
