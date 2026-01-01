@@ -1,4 +1,4 @@
-# Aero Bound Ventures
+# Air Earth
 
 Aero Bound Ventures is a modern air travel booking platform. This monorepo contains the code for the web frontend, backend, mobile app, and shared resources.
 
